@@ -6,11 +6,11 @@
 #    By: anouri <anouri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 17:56:46 by anouri            #+#    #+#              #
-#    Updated: 2024/04/25 14:31:34 by anouri           ###   ########.fr        #
+#    Updated: 2024/04/30 15:58:22 by anouri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME= array
+NAME= Span
 
 INCDIR= -I./incs
 
