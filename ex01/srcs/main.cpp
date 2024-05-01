@@ -104,5 +104,13 @@ int main()
 			std::cerr << RED << e.what() << RESET << std::endl;
 		}
 	}
+	{
+		Span sp(10);
+		sp.fillVector(10, 200);
+	  int s = sp.shortestSpan();
+    int l = sp.longestSpan();
+    std::cout << "shortest Span = " << s << std::endl;
+    std::cout << "longest Span = " << l << std::endl;
+	}
 	return (0);
 }
