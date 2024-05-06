@@ -18,6 +18,7 @@
 #include <vector>
 #include <iostream>
 #include <limits>
+#include <algorithm>
 
 class Span
 {
@@ -46,6 +47,7 @@ class Span
         void addNumber(int nb);
         int shortestSpan();
         int longestSpan();
+        void fillVector(int nbElements, int max);
 };
 
 Span::Span(): _N(0)
@@ -138,5 +140,26 @@ int Span::longestSpan()
         }
     }
     return (longestSpan);
+}
+
+void Span::fillVector(int nbElements, int max)
+{
+    /*generate an array of random numbers that has _N elements*/
+    srand(time(NULL));
+    // Allocate memory for the array
+    int *arr = new int[nbElements];
+
+    // Generate random numbers within the specified range and store them in the array
+    for (int i = 0; i < nbElements; ++i) {
+        arr[i] = (rand() % max);
+    }
+    this->_span.insert (this->_span.begin() ,arr, arr + nbElements);
+    std::cout << "myvector contains: \n";
+    std::vector<int>::iterator it;
+    for (it=_span.begin(); it<_span.end(); it++)
+        std::cout << ' ' << *it;
+    std::cout << '\n';
+
+    delete arr;
 }
 #endif
