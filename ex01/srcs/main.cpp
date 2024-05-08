@@ -11,6 +11,19 @@
 /* ************************************************************************** */
 
 #include "../incs/Span.hpp"
+#include <vector>
+
+
+int *generate(unsigned int nbElements, int max)
+{
+    int *arr = new int[nbElements];
+    srand(time(NULL));
+    for (unsigned int i = 0; i < nbElements; ++i) {
+        arr[i] = (rand() % max);
+    }
+    return(arr);
+}
+
 int main()
 {
 	
@@ -105,12 +118,22 @@ int main()
 		}
 	}
 	{
+	try
+	{
+		int *arr = generate(10, 200);
 		Span sp(10);
-		sp.fillVector(10, 200);
-	  int s = sp.shortestSpan();
-    int l = sp.longestSpan();
-    std::cout << "shortest Span = " << s << std::endl;
-    std::cout << "longest Span = " << l << std::endl;
+		sp.fillVector(arr, arr+9);
+	 	 int s = sp.shortestSpan();
+		int l = sp.longestSpan();
+		std::cout << "shortest Span = " << s << std::endl;
+		std::cout << "longest Span = " << l << std::endl;
+		delete arr;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	
 	}
 	return (0);
 }

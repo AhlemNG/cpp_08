@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: anouri <anouri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/04/23 17:56:46 by anouri            #+#    #+#              #
-#    Updated: 2024/04/30 15:57:38 by anouri           ###   ########.fr        #
+#    Created: 2024/05/02 16:03:37 by anouri            #+#    #+#              #
+#    Updated: 2024/05/04 13:42:16 by anouri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,10 @@ CXX= c++
 
 CXXFLAGS= -Wall -Werror -Wextra -std=c++98 ${INCDIR} 
 
-SRCS = ${SRCDIR}/main.cpp
+SRCS = ${wildcard ${SRCDIR}/*.cpp}
 
 OBJS = ${SRCS:.cpp=.o}
+DEPS = $(OBJS:.o=.d)
 
 RM= rm -rf
 
@@ -34,14 +35,17 @@ ${NAME}: ${OBJS}
 all: ${NAME}
 
 %.o:%.cpp
-	${CXX} ${CXXFLAGS} -c $< -o $@
+	${CXX} ${CXXFLAGS} -c -MMD  $< -o $@  -I$(INCDIR)
 
 clean:
 	${RM} ${OBJS}
 
 fclean: clean
-	${RM} ${NAME}
+	${RM} ${NAME} ${DEPS}
 
 re: fclean all
+
+
+-include $(DEPS)
 
 .Phony: clean fclean re

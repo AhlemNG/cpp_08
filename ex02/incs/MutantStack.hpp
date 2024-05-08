@@ -13,9 +13,10 @@
 #ifndef MUTANTSTACK_HPP
 #define MUTANTSTACK_HPP
 
-#include <deque>
 #include <stack>
 #include<iostream>
+#include<iterator>
+
 #include "Colors.hpp"
 
 
@@ -27,57 +28,30 @@ classes (such as deque or list) to handle the elements. The underlying
 container is encapsulated in such a way that its elements are accessed 
 by the members of the container adaptor independently of the underlying container class used.*/
 
-template< typename T, typename container = std::deque<T> >
+template< typename T>
 
-class MutantStack : public std::stack<T, container>
+class MutantStack : public std::stack<T>
 {
-    private:
-        size_t _size;
     public:
+        typedef typename std::stack<T>::container_type::iterator iterator;
         MutantStack(void){}
         ~MutantStack(){}
-        MutantStack(const MutantStack &src): std::stack<T, container>(src){}
+        MutantStack(const MutantStack &src): std::stack<T>(src){}
         MutantStack &operator=(const MutantStack &rhs)
         {
             if (this != &rhs)
             {
-                std::stack<T, container>::operator=(rhs);
+                std::stack<T>::operator=(rhs);
             }
             return(*this);    
         }
+        /*iterators*/
+        iterator begin() {
+            return (this->c.begin());
+        }
 
-    /*public member functions*/
-        bool empty() const
-        {
-            return(std::stack<T, container>::empty());
-        }
-        size_t size() const
-        {
-            return(std::stack<T, container>::size());
-        }
-        T& top() //this one
-        {
-            return(std::stack<T, container>::top());
-        }
-        const T& top() const // or this one
-        {
-            return(std::stack<T, container>::top());
-        }
-        void push (const T& val)
-        {
-            std::stack<T, container>::push(val);
-        }
-        // template <class... Args> void emplace (Args&&... args)
-        // {
-        //     std::stack<T, container>::emplace(args);
-        // }
-        void pop()
-        {
-            std::stack<T, container>::pop();
-        }
-        void swap (MutantStack& x)
-        {
-            std::stack<T, container>::swap(x);
+        iterator end() {
+            return (this->c.end());
         }
 };
 

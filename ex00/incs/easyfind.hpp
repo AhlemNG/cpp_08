@@ -16,14 +16,6 @@
 #include <exception>
 #include <algorithm>
 
-/*In C++, auto is a keyword used for automatic type inference. 
-When auto is used to declare a variable, the type of the variable
-is automatically deduced from its initializer.
-the type of it will be automatically deduced to be an iterator
-to elements of the container.
-This is a convenient way to declare variables when the type is
-either long or complex and can be inferred from the context.*/
-
 class targetNotFound : public std::exception
 {
     public:
