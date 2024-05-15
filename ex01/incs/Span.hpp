@@ -6,7 +6,7 @@
 /*   By: anouri <anouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 11:28:13 by anouri            #+#    #+#             */
-/*   Updated: 2024/04/30 17:47:19 by anouri           ###   ########.fr       */
+/*   Updated: 2024/05/15 15:27:01 by anouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ class Span
         void addNumber(int nb);
         int shortestSpan();
         int longestSpan();
-        void fillVector(int * first, int * last);
+        void fillVector(std::vector<int>::iterator first, std::vector<int>::iterator last);
 };
 
 #endif

@@ -6,23 +6,12 @@
 /*   By: anouri <anouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 11:27:37 by anouri            #+#    #+#             */
-/*   Updated: 2024/04/30 18:11:23 by anouri           ###   ########.fr       */
+/*   Updated: 2024/05/15 17:07:57 by anouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/Span.hpp"
 #include <vector>
-
-
-int *generate(unsigned int nbElements, int max)
-{
-    int *arr = new int[nbElements];
-    srand(time(NULL));
-    for (unsigned int i = 0; i < nbElements; ++i) {
-        arr[i] = (rand() % max);
-    }
-    return(arr);
-}
 
 int main()
 {
@@ -118,22 +107,26 @@ int main()
 		}
 	}
 	{
-	try
-	{
-		int *arr = generate(10, 200);
-		Span sp(10);
-		sp.fillVector(arr, arr+9);
-	 	 int s = sp.shortestSpan();
-		int l = sp.longestSpan();
-		std::cout << "shortest Span = " << s << std::endl;
-		std::cout << "longest Span = " << l << std::endl;
-		delete arr;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	
+		std::cout << "------------------------TEST-----------------------" << std::endl;
+		try
+		{
+			Span sp = Span(10000);
+			std::vector<int> myVector;
+			srand(time(NULL));
+			for (int i = 0; i < 10000; i++)
+				myVector.push_back(rand() % 99999);
+			sp.fillVector(myVector.begin() ,myVector.end());
+			
+			int s = sp.shortestSpan();
+			int l = sp.longestSpan();
+			std::cout << "shortest Span = " << s << std::endl;
+			std::cout << "longest Span = " << l << std::endl;
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
+		
 	}
 	return (0);
 }

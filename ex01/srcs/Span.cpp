@@ -6,7 +6,7 @@
 /*   By: anouri <anouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 16:24:54 by anouri            #+#    #+#             */
-/*   Updated: 2024/04/30 17:23:12 by anouri           ###   ########.fr       */
+/*   Updated: 2024/05/15 17:35:28 by anouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,20 @@ Span::Span(): _N(0)
 Span::Span(unsigned int N): _N(N)
 {
     std::cout << BLUE << "Span parametric constructor called" << RESET<< std::endl;
-    //il faut dire ici que vector a la taille N! comme nt faire > :'O
 }
 
-Span::Span(const Span &src)
+Span::Span(const Span &src): _span(src._span), _N(src._N)
 {
     std::cout << BLUE << "Span copy constructor called" << RESET<< std::endl;
-    _N = src._N;
-    _span = src._span;// Copy assignation operator of std::vector automatically handles copying
 }
 
 Span &Span::operator=(const Span &rhs)
 {
-    std::cout << BLUE << "Span copy assignation operator constructor called" << RESET<< std::endl;
+    std::cout << BLUE << "Span copy assignment operator constructor called" << RESET<< std::endl;
     if (this != &rhs)
     {
         _N = rhs._N;
-        _span = rhs._span;// Copy assignation operator of std::vector automatically handles copying
+        _span = rhs._span;
     }
     return(*this);
 }
@@ -85,7 +82,10 @@ int Span::shortestSpan()
         {
             int spanDifference = abs(_span[i] - _span[j]);
             if (spanDifference < shortestSpan)
+            {
                 shortestSpan = spanDifference ;
+                // std::cout << "spanDifference between  " << _span[i] << " and " << _span[j] << std::endl;
+            }
         }
     }
     return (shortestSpan);
@@ -102,34 +102,23 @@ int Span::longestSpan()
         {
             int spanDifference = abs(_span[i] - _span[j]);
             if (spanDifference > longestSpan)
+            {
                 longestSpan = spanDifference ;
+                // std::cout << "spanDifference between  " << _span[i] << " and " << _span[j] << std::endl;
+            }
         }
     }
     return (longestSpan);
 }
 
-void Span::fillVector(int *first, int *last)
+void Span::fillVector(std::vector<int>::iterator first, std::vector<int>::iterator last)
 {
-    // if (nbElements > _N)
-    //     throw(tooSmall());
-    
+    if (last - first > _N)
+        throw(tooSmall());
     this->_span.insert (this->_span.begin() ,first, last);
-     std::cout << "myvector contains: \n";
-    // std::vector<int>::iterator it;
-    // for (it=_span.begin(); it<_span.end(); it++)
-    //     std::cout << ' ' << *it;
-    // std::cout << '\n';
+    std::cout << "myvector contains: \n";
+    std::vector<int>::iterator it;
+    for (it=_span.begin(); it<_span.end(); it++)
+        std::cout << ' ' << *it;
+    std::cout << '\n';
 }
-
-
-
-// ofstean &operator<<(ofsteam &o, std::vector<int> rhs)
-// {
-//     o << "myvector contains: \n";
-//     std::vector<int>::iterator it;
-//     for (it=_span.begin(); it<_span.end(); it++)
-//         o << ' ' << *it;
-//         o << '\n';
-//     return o;
-// }
-

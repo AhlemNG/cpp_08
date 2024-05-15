@@ -6,7 +6,7 @@
 /*   By: anouri <anouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:12:08 by anouri            #+#    #+#             */
-/*   Updated: 2024/04/25 15:30:58 by anouri           ###   ########.fr       */
+/*   Updated: 2024/05/15 17:32:57 by anouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ unsigned int easyfind(T container, int target)
 {
     typename T::iterator it = std::find(container.begin(), container.end(), target);
     if (it != container.end())
-        return(it - container.begin() + 1);
+        return(std::distance(container.begin(), it) + 1);
     else
         throw(targetNotFound());
 }
